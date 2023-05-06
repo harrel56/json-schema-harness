@@ -29,6 +29,7 @@ def jsonProvider = [
 dependencies {
     implementation harnessImplementation
     implementation jsonProvider
+    implementation 'com.google.code.gson:gson:2.8.5'
 }
 
 jar {
