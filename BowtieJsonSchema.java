@@ -45,7 +45,7 @@ public class BowtieJsonSchema {
     }
 
     private void handle(String data) {
-        try {
+        try      {
             JsonNode node = objectMapper.readTree(data);
             String cmd = node.get("cmd").asText();
             switch (cmd) {
@@ -55,8 +55,7 @@ public class BowtieJsonSchema {
                 case "stop" -> System.exit(0);
                 default -> throw new IllegalArgumentException("Unknown cmd [%s]".formatted(cmd));
             }
-        } catch (IOException e) {
-            throw new UncheckedIOException(e);
+        } catch (IOException e) {throw new UncheckedIOException(e);
         }
     }
 
