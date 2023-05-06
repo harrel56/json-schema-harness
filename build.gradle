@@ -27,9 +27,8 @@ def jsonProvider = [
 ]
 
 dependencies {
-    implementation harnessImplementation
+    implementation "$harnessImplementation.group:$harnessImplementation.name:$harnessImplementation.version"
     implementation "$jsonProvider.group:$jsonProvider.name:$jsonProvider.version"
-    implementation 'com.google.code.gson:gson:2.8.5'
 }
 
 jar {
