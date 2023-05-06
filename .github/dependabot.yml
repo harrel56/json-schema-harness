@@ -9,5 +9,5 @@ updates:
     directory: "/build.gradle" # Location of package manifests
     schedule:
       interval: "daily"
-      time: "22:30"
+      time: "22:16"
       timezone: "Europe/Warsaw"
