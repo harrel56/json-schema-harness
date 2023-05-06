@@ -44,7 +44,7 @@ public class BowtieJsonSchema {
         reader.lines().forEach(this::handle);
     }
 
-    private void handle(String data) {
+    private void    handle(String data) {
         try      {
             JsonNode node = objectMapper.readTree(data);
             String cmd = node.get("cmd").asText();
