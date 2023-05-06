@@ -28,7 +28,7 @@ def jsonProvider = [
 
 dependencies {
     implementation harnessImplementation
-    implementation jsonProvider
+    implementation "com.fasterxml.jackson.core:jackson-databind:$jsonProvider.version"
     implementation 'com.google.code.gson:gson:2.8.5'
 }
 
