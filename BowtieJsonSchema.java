@@ -5,7 +5,7 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import dev.harrel.jsonschema.SchemaResolver;
-import dev.harrel.jsonschema.ValidationResult;
+import dev.harrel.jsonschema.Validator;
 import dev.harrel.jsonschema.ValidatorFactory;
 
 import java.io.*;
@@ -109,7 +109,7 @@ public class BowtieJsonSchema {
 
             validatorFactory.withSchemaResolver(new RegistrySchemaResolver(runRequest.testCase().registry()));
             List<TestResult> results = runRequest.testCase().tests().stream().map(test -> {
-                ValidationResult result = validatorFactory.validate(runRequest.testCase().schema(), test.instance());
+                Validator.Result result = validatorFactory.validate(runRequest.testCase().schema(), test.instance());
                 return new TestResult(result.isValid());
             }).toList();
             output.println(objectMapper.writeValueAsString(new RunResponse(runRequest.seq(), results)));
@@ -144,8 +144,10 @@ public class BowtieJsonSchema {
         }
 
         @Override
-        public Optional<String> resolve(String uri) {
-            return Optional.ofNullable(registry.get(uri)).map(Object::toString);
+        public SchemaResolver.Result resolve(String uri) {
+            return Optional.ofNullable(registry.get(uri))
+                    .map(Result::fromProviderNode)
+                    .orElse(SchemaResolver.Result.empty());
         }
     }
 }
